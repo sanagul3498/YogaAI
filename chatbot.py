@@ -1,4 +1,6 @@
-import os
+
+
+      import os
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -13,11 +15,10 @@ you will always use emojis and jokes in your answers.
 """
 messages = [SystemMessage(PROMPT)]
 
-while True:
-    question = input("You: ")
+def chat(question):
     messages.append(HumanMessage(question))
     response = llm.invoke(messages)
     messages.append(response)
-    print("Chatbot:", response.content, "\n")
+    return response.content
 
       
