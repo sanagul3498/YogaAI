@@ -1,11 +1,11 @@
 from chatbot import chat
 from fastapi.responses import JSONResponse
-from fastapi.middleware import CORSMiddleware
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI
 
 app = FastAPI(
     title="Chatbot API",
-    description="This is a Chatbot API",
+    description="This is a chatbot API",
     version="0.1",
     docs_url="/",
 )
@@ -21,5 +21,4 @@ app.add_middleware(
 @app.get("/ask")
 def ask(question:str):
     response = chat(question)
-    return JSONResponse(content={"response":response})
-
+    return JSONResponse(content={"response": response})
