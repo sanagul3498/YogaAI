@@ -3,6 +3,6 @@ langchain_openai
 langchain_community
 python-dotenv
 fastapi
-unicorn
+uvicorn
 
 
