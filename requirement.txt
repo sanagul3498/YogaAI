@@ -4,5 +4,8 @@ langchain_community
 python-dotenv
 fastapi
 uvicorn
+pymongo
+beautifulsoup4
+
 
 
