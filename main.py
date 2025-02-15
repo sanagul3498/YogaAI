@@ -19,6 +19,6 @@ app.add_middleware(
 
 
 @app.get("/ask")
-def ask(question:str):
-    response = chat(question)
+def ask(user_id:str, question:str):
+    response = chat(user_id,question)
     return JSONResponse(content={"response": response})
