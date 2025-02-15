@@ -6,6 +6,7 @@ from langchain_openai import ChatOpenAI
 from langchain_core.messages import AIMessage, SystemMessage, HumanMessage, ToolMessage
 from langchain_core.tools import tool
 from data_retriever import web_database
+from Mongo_service import save_chat,fetch_chat
 
 
 @tool
@@ -30,9 +31,11 @@ You will tell them how important yoga is for not only our physical health but me
 You will talk about different yoga postures suitable for different age types.
 You will tell the famous and most suitable yoga postures for teens, men and women.
 """
-messages = [SystemMessage(PROMPT)]
 
-def chat(question):
+def chat(user_id, question):
+    messages = [SystemMessage(PROMPT)]
+
+    messages.extend(fetch_chat(user_id))
     messages.append(HumanMessage(question))
     response = llm.invoke(messages)
     messages.append(response)
@@ -45,10 +48,20 @@ def chat(question):
                messages.append(ToolMessage(get_web_data.invoke(input=question),tool_call_id=tool_call['id']))
  
 
+
     response = llm.invoke(messages)
     messages.append(response)
-
+ # save user chat
+    save_chat({
+        'user_id': user_id,
+        'role': 'user',
+        'content': question
+    })
+     
+    # save ai chat
+    save_chat({
+        'user_id': user_id,
+        'role': 'assistant',
+        'content': response.content
+    })
     return response.content
-
-print(chat("what is the most famous yoga pose?"))
-      
