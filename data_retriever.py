@@ -6,6 +6,9 @@ from langchain_openai import OpenAIEmbeddings
 def web_database(question):
     pages = [
     "http://soulfulstretch.liveblog365.com/",
+    "http://soulfulstretch.liveblog365.com/about/",
+    "http://soulfulstretch.liveblog365.com/services/",
+    "http://soulfulstretch.liveblog365.com/contact/"
     ]
     docs = []
     for page in pages:
